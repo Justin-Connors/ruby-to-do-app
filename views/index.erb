@@ -8,8 +8,18 @@
 <body>
   <h1>To-Do List</h1>
   <ul>
-    <% @tasks.each do |task| %>
-      <li><%= task %></li>
+    <% @tasks.each_with_index do |task, index| %>
+    <li>
+        <%= task %>
+        <form action="/delete_task" method="post" style="display:inline;">
+          <input type="hidden" name="task_id" value="<%= index %>">
+          <button type="submit">X</button>
+        </form>
+        <form action="/complete_task" method="post" style="display:inline;">
+          <input type="hidden" name="task_id" value="<%= index %>">
+          <button type="submit">✔</button>
+        </form>
+      </li>
     <% end %>
   </ul>
   <form action="/add_task" method="post">
