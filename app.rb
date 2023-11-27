@@ -4,6 +4,12 @@ require 'erb'
 #Store tasks in an array
 tasks = []
 
+#style.css route
+get '/styles.css' do
+    content_type 'text/css'
+    File.read('./views/styles.css')
+end
+
 #default route
 get '/' do
     @tasks = tasks

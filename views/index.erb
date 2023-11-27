@@ -4,28 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do List</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <h1>To-Do List</h1>
-  <ul>
-    <% @tasks.each_with_index do |task, index| %>
-    <li>
-        <%= task %>
-        <form action="/delete_task" method="post" style="display:inline;">
-          <input type="hidden" name="task_id" value="<%= index %>">
-          <button type="submit">X</button>
-        </form>
-        <form action="/complete_task" method="post" style="display:inline;">
-          <input type="hidden" name="task_id" value="<%= index %>">
-          <button type="submit">✔</button>
-        </form>
-      </li>
-    <% end %>
-  </ul>
   <form action="/add_task" method="post">
     <label for="task">New Task:</label>
     <input type="text" id="task" name="task" required>
-    <button type="submit">Add Task</button>
+    <button type="submit" class="submit_btn">Add Task</button>
   </form>
+  <ul>
+    <% @tasks.each_with_index do |task, index| %>
+    <li>
+      <p class="task_name"><%= task %></p>
+      <form action="/complete_task" method="post">
+        <input type="hidden" name="task_id" value="<%= index %>">
+        <button type="submit" class="complete_btn">✔</button>
+      </form>
+      <form action="/delete_task" method="post">
+        <input type="hidden" name="task_id" value="<%= index %>">
+        <button type="submit" class="delete_btn">❌</button>
+      </form>
+    </li>
+    <% end %>
+  </ul>
 </body>
 </html>
