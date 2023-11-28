@@ -19,7 +19,7 @@ end
 #add task route
 post '/add_task' do
     task = params[:task]
-    tasks << task unless task.empty?
+    tasks << { description: task, completed: false } unless task.empty?
     redirect '/'
 end
 
@@ -33,6 +33,6 @@ end
 #complete task route
 post '/complete_task' do
     task_id = params[:task_id].to_i
-    tasks[task_id] = "<strike>#{tasks[task_id]}</strike>"
+    tasks[task_id][:completed] = true
     redirect '/'
 end

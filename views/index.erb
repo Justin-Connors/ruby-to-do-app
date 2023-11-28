@@ -8,24 +8,38 @@
 </head>
 <body>
   <h1>To-Do List</h1>
+
   <form action="/add_task" method="post">
     <label for="task">New Task:</label>
-    <input type="text" id="task" name="task" required>
+    <input type="text" id="task" name="task" maxlength="15" required>
     <button type="submit" class="submit_btn">Add Task</button>
   </form>
+
   <ul>
     <% @tasks.each_with_index do |task, index| %>
+
     <li>
-      <p class="task_name"><%= task %></p>
+      <p class="task_name">
+        <%= task[:completed] ? 
+        "<strike>#{task[:description]}</strike>" : 
+        task[:description] 
+        %>
+      </p>
+
       <form action="/complete_task" method="post">
         <input type="hidden" name="task_id" value="<%= index %>">
-        <button type="submit" class="complete_btn">✔</button>
+        <%= task[:completed] ? 
+        "<button type='button' class='complete_btn' style='display: none'>✔</button>" : 
+        "<button type='submit' class='complete_btn'>✔</button>"
+        %>
       </form>
+
       <form action="/delete_task" method="post">
         <input type="hidden" name="task_id" value="<%= index %>">
         <button type="submit" class="delete_btn">❌</button>
       </form>
     </li>
+
     <% end %>
   </ul>
 </body>
