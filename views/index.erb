@@ -29,7 +29,7 @@
       <form action="/complete_task" method="post">
         <input type="hidden" name="task_id" value="<%= index %>">
         <%= task[:completed] ? 
-        "<button type='button' class='complete_btn' style='display: none'>✔</button>" : 
+        "<button type='button' class='complete_btn' style='display:none;'>✔</button>" : 
         "<button type='submit' class='complete_btn'>✔</button>"
         %>
       </form>
